@@ -14,3 +14,5 @@
     See the License for the specific language governing permissions and
     limitations under the License.
     
+
+This repo contains some example scripts and programs to setup and explore a federated data spaces approach on Google Cloud Platform. 

@@ -1,0 +1,13 @@
+title: dataspace-federated-reader
+description: role for the data space owner service accounts or user
+stage: alpha
+includedPermissions:
+- bigquery.datasets.get
+- bigquery.routines.get
+- bigquery.routines.list
+- bigquery.tables.get
+- bigquery.tables.getData
+- bigquery.tables.list
+- storage.objects.list
+- storage.buckets.get
+- bigquery.readsessions.create
