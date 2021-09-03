@@ -16,3 +16,6 @@
     
 
 This repo contains some example scripts and programs to setup and explore a federated data spaces approach on Google Cloud Platform. 
+It contains the following subfolders with individual purposes and readme files:
+- setup: contains the terraform templates to setup an example architecture of federated dataspaces within a single project 
+- load_example_data: contains a tool to load the federated emnist dataset, split it and store it into CSV files for usage in the dataspaces

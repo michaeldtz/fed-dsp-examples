@@ -1,9 +1,0 @@
-title: dataspace-admin
-description: role for an admin that has access to list and delete dataspace objects
-stage: alpha
-includedPermissions:
-- bigquery.datasets.get
-- bigquery.datasets.delete
-- storage.buckets.list
-- storage.buckets.get
-- storage.buckets.delete

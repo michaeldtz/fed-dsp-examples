@@ -1,0 +1,3 @@
+# Always download them freshly an construct them with the script
+datasets/
+fed_emnist_dataset*.csv
