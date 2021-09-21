@@ -27,4 +27,4 @@ steps:
   - --labels=type=federation
   - --service-account=federated-access-sa@$PROJECT_ID.iam.gserviceaccount.com
   - --no-allow-unauthenticated 
-  - --ingress=internal
+ # - --ingress=internal
