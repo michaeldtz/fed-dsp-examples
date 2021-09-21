@@ -33,5 +33,5 @@ gsutil cp fed_emnist_dataset_trn_$FILE_NUM.csv gs://${BUCKET_PREFIX}-${DATA_SPAC
 bq --location=$LOCATION load \
 --autodetect --replace --source_format=CSV \
 ${PROJECT_ID}:${DATASET_PREFIX}_${DATA_SPACE_ID}_${SERVING_SUFFIX}.emnist_train \
-gs://${BUCKET_PREFIX}-${DATA_SPACE_ID}-${SERVING_SUFFIX}/emnist_train.csv
+gs://${BUCKET_PREFIX}-${DATA_SPACE_ID}-${SERVING_SUFFIX}-${PROJECT_ID}/emnist_train.csv
 

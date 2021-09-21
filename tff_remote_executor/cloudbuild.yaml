@@ -1,0 +1,30 @@
+steps:
+- name: "bash"
+  dir: "$TRIGGER_BUILD_CONFIG_PATH"
+  entrypoint: "wget"
+  args:
+  - https://raw.githubusercontent.com/tensorflow/federated/main/tensorflow_federated/tools/runtime/remote_executor_service.py
+
+- name: "gcr.io/cloud-builders/docker"
+  dir: "$TRIGGER_BUILD_CONFIG_PATH"
+  args: ["build","-t","gcr.io/$PROJECT_ID/tff-remote-executor:$BUILD_ID","."]
+
+- name: "gcr.io/cloud-builders/docker"
+  dir: "$TRIGGER_BUILD_CONFIG_PATH"
+  args: ["push","gcr.io/$PROJECT_ID/tff-remote-executor:$BUILD_ID"]
+
+- name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  dir: "$TRIGGER_BUILD_CONFIG_PATH"
+  entrypoint: "gcloud"
+  args: 
+  - run
+  - deploy 
+  - tff-executor-federation
+  - --platform=managed
+  - --region=europe-west3
+  - --image=gcr.io/$PROJECT_ID/tff-remote-executor:$BUILD_ID
+  - --port=8000
+  - --labels=type=federation
+  - --service-account=federated-access-sa@$PROJECT_ID.iam.gserviceaccount.com
+  - --no-allow-unauthenticated 
+  - --ingress=internal

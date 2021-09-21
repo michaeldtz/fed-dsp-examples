@@ -146,6 +146,7 @@ resource "google_storage_bucket_iam_binding" "writer_for_compute" {
   role   = google_project_iam_custom_role.dataspace_federated_writer_role.id
   members = [
     "serviceAccount:${google_service_account.ds_federated_compute.email}",
+    "serviceAccount:${google_service_account.ds_federated_access.email}",
   ]
 }
 
@@ -163,6 +164,11 @@ resource "google_bigquery_dataset" "ds_workenv_dataset" {
   access {
     role          = google_project_iam_custom_role.dataspace_federated_writer_role.id
     user_by_email = google_service_account.ds_federated_compute.email
+  }
+
+  access {
+    role          = google_project_iam_custom_role.dataspace_federated_writer_role.id
+    user_by_email = google_service_account.ds_federated_access.email
   }
 
   access {
