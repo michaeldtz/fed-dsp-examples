@@ -27,6 +27,17 @@ This repo contains the pieces to build a container with the TFF Executor and run
 gcloud services enable cloudbuild.googleapis.com run.googleapis.com
 ```
 
+
+
+### Run CloudBuild 
+```
+gcloud builds submit --config=cloudbuild.yaml 
+```
+
+
+### Optionally
+Potentially you need to make sure that the Cloud Build service account has access rights to the federated-access-sa. Therefor you can run: 
+
 ```
 export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
@@ -35,9 +46,4 @@ gcloud iam service-accounts add-iam-policy-binding \
     ${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
     --member=serviceAccount:federated-access-sa@${PROJECT_ID}.iam.gserviceaccount.com \
     --role=roles/iam.serviceAccountUser
-```
-
-### Run CloudBuild 
-```
-gcloud builds submit --config=cloudbuild.yaml 
 ```
