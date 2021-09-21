@@ -38,7 +38,7 @@ gcloud builds submit --config=cloudbuild.yaml
 ### Optionally
 Potentially you need to make sure that the Cloud Build service account has access rights to the federated-access-sa. Therefor you can run: 
 
-```
+``` 
 export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
 
