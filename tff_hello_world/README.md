@@ -17,27 +17,24 @@
 
 ### Introduction
 
-The remote executor is the generic worker that receives Federated Tasks from the TFF server. Once started, the TFF remote executor listens on a GRPC port and waits for receiving instructions for a TFF server. 
+This python program is a little "hello world" alike example for TFF. It performs a federated computation of sums. Therefore it creates locally, at the federated nodes computes, a range of integers, sums it up and then creates a federated sum across all participants.  
 
-This repo contains the pieces to build a container with the TFF Executor and run it on Google Cloud Run. All these steps are executed within a Cloud Build pipeline. 
+It is build to run with a tff executor that is deployed on Cloud Run. For that it automatically gathers the URL and gets a token for Authentication. 
 
 
-### Activate APIs
-```
-gcloud services enable cloudbuild.googleapis.com run.googleapis.com
-```
+### Preparation
+This example was tested (and runs most stable) with the following versions:
+- Python 3.7.7.
+- TensorFlow 2.5.1
+- TensorFlow Federated 0.19.0
+
+In order to prepare your python environment you can leverage the requirements.txt to install these dependencies. 
+
+### Run
+If you have a different name for your Cloud Run service or something else is different you might need to adapt the python code. If not, then just run:
 
 ```
-export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
-export PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
-
-gcloud iam service-accounts add-iam-policy-binding \
-    ${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
-    --member=serviceAccount:federated-access-sa@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role=roles/iam.serviceAccountUser
+python tff_sum_of_sums.py
 ```
 
-### Run CloudBuild 
-```
-gcloud builds submit --config=cloudbuild.yaml 
-```
+
