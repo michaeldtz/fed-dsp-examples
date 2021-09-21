@@ -28,7 +28,7 @@ import numpy as np
 import nest_asyncio
 nest_asyncio.apply()
 
-tf.get_logger().setLevel('DEBUG')
+#tf.get_logger().setLevel('ERROR')
 
 # This is the TFF style code that will run on the clients
 
