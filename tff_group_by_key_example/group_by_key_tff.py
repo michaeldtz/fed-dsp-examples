@@ -30,7 +30,7 @@ from group_by_key_lib import gather_data, key_list_func
 
 def run():
 
-  dataset       = gather_data()
+  dataset       = gather_data("1")
   key_list      = key_list_func(dataset)
   key_list_t    = [t.numpy() for t in key_list]
 
@@ -54,11 +54,11 @@ def run():
         initial_state=tf.zeros([key_size], tf.int32),
         reduce_func=_count_keys)
  
-  @tff.federated_computation(tff.FederatedType(tf.int64, tff.CLIENTS))
-  def federated_group_agg(n):
+  @tff.federated_computation(tff.FederatedType(tf.string, tff.CLIENTS))
+  def federated_group_agg(id):
 
     # wrap the used function into tff computations
-    tff_gather_data_func = tff.tf_computation(gather_data)
+    tff_gather_data_func = tff.tf_computation(gather_data, tf.string)
     
     # Derive the dataset type from the gather function
     tff_dataset_type = tff_gather_data_func.type_signature.result # tff.SequenceType(OrderedDict([('TRANS_ID', tf.string), ('SEND_BIC', tf.int64), ('REC_BIC', tf.int64), ('KEY', tf.int64)]))
@@ -73,7 +73,7 @@ def run():
     print(tff_key_list_func.type_signature)   
 
     # Get dataset on client side 
-    tff_client_dataset = tff.federated_eval(tff_gather_data_func, tff.CLIENTS)
+    tff_client_dataset = tff.federated_map(tff_gather_data_func, id)
   
     # Calculate the aggregates per client
     client_aggregates = tff.federated_map(tff_count_by_key, tff_client_dataset)
@@ -111,7 +111,7 @@ def run():
 
 
   ## Now execute the federated
-  result = federated_group_agg([0])
+  result = federated_group_agg(["1","2"])
   print(result)
 
 

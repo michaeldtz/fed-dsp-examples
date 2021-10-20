@@ -28,7 +28,7 @@ tf.get_logger().setLevel('ERROR')
 
 def run():
     
-    dataset       = gather_data()
+    dataset       = gather_data("2")
     total_count   = count_total_func(dataset)
 
     key_list      = key_list_func(dataset)

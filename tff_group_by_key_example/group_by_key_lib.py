@@ -72,9 +72,9 @@ def key_count_func(ds):
 
 
 @tf.function
-def gather_data():
-    filename = tf.constant("test_data.csv")
-    ds       = tf.data.experimental.CsvDataset("test_data.csv", record_defaults=[tf.string,tf.int64,tf.int64,tf.float32], header=True)
+def gather_data(id):
+    #filename = tf.constant("test_data_" + id + ".csv")
+    ds       = tf.data.experimental.CsvDataset("test_data_" + id + ".csv", record_defaults=[tf.string,tf.int64,tf.int64,tf.float32], header=True)
 
     return ds.map(convert_to_dict_func).map(compute_key_func)
 
