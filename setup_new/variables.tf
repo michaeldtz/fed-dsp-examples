@@ -14,11 +14,15 @@
 
 
 variable "project_id" {
-
+    description = "Id of the workarea and setup project"
 }
 
 variable "fedarea_project_id" {
-    
+    description = "Id of the federation area project"
+}
+
+variable "dataspace_project_id_prefix" {
+    description = "Prefix for the dataspace projects"
 }
 
 variable "location" {

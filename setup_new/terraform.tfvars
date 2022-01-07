@@ -14,4 +14,6 @@
 
 project_id="SET_PROJECT_ID"
 location="europe-west3"
+
 fedarea_project_id="FEDAREA_PROJECT_ID"
+dataspace_project_id_prefix="DATASPACE_PROJECT_PREFIX"

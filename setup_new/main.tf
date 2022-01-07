@@ -129,7 +129,7 @@ module "dataspace" {
 
   source           = "./modules/dataspace"
  
-  project_id       = "federated-dataspace-${each.value.id}"
+  project_id       = "${var.dataspace_project_id_prefix}-${each.value.id}"
   dataspace_id     = each.value.id
   location         = var.location
   
